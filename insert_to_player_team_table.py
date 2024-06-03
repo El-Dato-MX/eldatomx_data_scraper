@@ -6,9 +6,10 @@ load_dotenv()
 
 conn, cursor = connect_to_database()
 
-players = playerindex.PlayerIndex(league_id=20).get_data_frames()[0]
+g_league_players = playerindex.PlayerIndex(league_id=20).get_data_frames()[0]
+nba_players = playerindex.PlayerIndex().get_data_frames()[0]
 
-for _, row in players.iterrows():
+for _, row in nba_players.iterrows():
     player_id = row['PERSON_ID']
     team_id = row['TEAM_ID']
     to_year = row['TO_YEAR']
