@@ -173,3 +173,41 @@ ON DUPLICATE KEY UPDATE
     UNDERDOG = VALUES(UNDERDOG),
     RAZZBALLID = VALUES(RAZZBALLID)
 '''
+
+insert_to_player_stats_table_query = '''INSERT INTO nba_player_stats (
+    PLAYER_ID, SEASON_ID, LEAGUE_ID, TEAM_ID, TEAM_ABBREVIATION,
+    PLAYER_AGE, GP, GS, MIN, FGM, FGA, FG_PCT, FG3M, FG3A,
+    FG3_PCT, FTM, FTA, FT_PCT, OREB, DREB, REB, AST, STL,
+    BLK, TOV, PF, PTS
+) VALUES (
+    %s, %s, %s, %s, %s,
+    %s, %s, %s, %s, %s, %s, %s, %s, %s,
+    %s, %s, %s, %s, %s, %s, %s, %s, %s,
+    %s, %s, %s, %s
+) ON DUPLICATE KEY UPDATE
+    LEAGUE_ID = VALUES(LEAGUE_ID),
+    TEAM_ID = VALUES(TEAM_ID),
+    TEAM_ABBREVIATION = VALUES(TEAM_ABBREVIATION),
+    PLAYER_AGE = VALUES(PLAYER_AGE),
+    GP = VALUES(GP),
+    GS = VALUES(GS),
+    MIN = VALUES(MIN),
+    FGM = VALUES(FGM),
+    FGA = VALUES(FGA),
+    FG_PCT = VALUES(FG_PCT),
+    FG3M = VALUES(FG3M),
+    FG3A = VALUES(FG3A),
+    FG3_PCT = VALUES(FG3_PCT),
+    FTM = VALUES(FTM),
+    FTA = VALUES(FTA),
+    FT_PCT = VALUES(FT_PCT),
+    OREB = VALUES(OREB),
+    DREB = VALUES(DREB),
+    REB = VALUES(REB),
+    AST = VALUES(AST),
+    STL = VALUES(STL),
+    BLK = VALUES(BLK),
+    TOV = VALUES(TOV),
+    PF = VALUES(PF),
+    PTS = VALUES(PTS);
+'''
