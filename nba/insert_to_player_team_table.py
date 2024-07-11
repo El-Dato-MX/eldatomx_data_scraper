@@ -16,6 +16,7 @@ nba_players = playerindex.PlayerIndex().get_data_frames()[0]
 for _, row in nba_players.iterrows():
     player_id = row['PERSON_ID']
     team_id = row['TEAM_ID']
+    # check this to season id
     to_year = row['TO_YEAR']
     season = f"{to_year}-{str(int(to_year) + 1)[-2:]}"
     cursor.execute(select_from_player_team_table_query, (player_id, team_id, season))

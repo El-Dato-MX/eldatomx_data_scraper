@@ -174,7 +174,7 @@ ON DUPLICATE KEY UPDATE
     RAZZBALLID = VALUES(RAZZBALLID)
 '''
 
-insert_to_player_stats_table_query = '''INSERT INTO nba_player_stats (
+insert_to_player_stats_table_query = """INSERT INTO nba_player_stats (
     PLAYER_ID, SEASON_ID, LEAGUE_ID, TEAM_ID, TEAM_ABBREVIATION,
     PLAYER_AGE, GP, GS, MIN, FGM, FGA, FG_PCT, FG3M, FG3A,
     FG3_PCT, FTM, FTA, FT_PCT, OREB, DREB, REB, AST, STL,
@@ -209,5 +209,82 @@ insert_to_player_stats_table_query = '''INSERT INTO nba_player_stats (
     BLK = VALUES(BLK),
     TOV = VALUES(TOV),
     PF = VALUES(PF),
-    PTS = VALUES(PTS);
-'''
+    PTS = VALUES(PTS);"""
+
+insert_to_team_stats_table_query = """
+INSERT INTO nba_team_stats (
+    TEAM_ID, TEAM_CITY, TEAM_NAME, YEAR, GP, WINS, LOSSES, WIN_PCT,
+    CONF_RANK, DIV_RANK, PO_WINS, PO_LOSSES, CONF_COUNT, DIV_COUNT, 
+    NBA_FINALS_APPEARANCE, FGM, FGA, FG_PCT, FG3M, FG3A, FG3_PCT, 
+    FTM, FTA, FT_PCT, OREB, DREB, REB, AST, PF, STL, TOV, BLK, PTS, PTS_RANK
+) VALUES (
+    %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s
+) ON DUPLICATE KEY UPDATE
+    TEAM_CITY = VALUES(TEAM_CITY),
+    TEAM_NAME = VALUES(TEAM_NAME),
+    GP = VALUES(GP),
+    WINS = VALUES(WINS),
+    LOSSES = VALUES(LOSSES),
+    WIN_PCT = VALUES(WIN_PCT),
+    CONF_RANK = VALUES(CONF_RANK),
+    DIV_RANK = VALUES(DIV_RANK),
+    PO_WINS = VALUES(PO_WINS),
+    PO_LOSSES = VALUES(PO_LOSSES),
+    CONF_COUNT = VALUES(CONF_COUNT),
+    DIV_COUNT = VALUES(DIV_COUNT),
+    NBA_FINALS_APPEARANCE = VALUES(NBA_FINALS_APPEARANCE),
+    FGM = VALUES(FGM),
+    FGA = VALUES(FGA),
+    FG_PCT = VALUES(FG_PCT),
+    FG3M = VALUES(FG3M),
+    FG3A = VALUES(FG3A),
+    FG3_PCT = VALUES(FG3_PCT),
+    FTM = VALUES(FTM),
+    FTA = VALUES(FTA),
+    FT_PCT = VALUES(FT_PCT),
+    OREB = VALUES(OREB),
+    DREB = VALUES(DREB),
+    REB = VALUES(REB),
+    AST = VALUES(AST),
+    PF = VALUES(PF),
+    STL = VALUES(STL),
+    TOV = VALUES(TOV),
+    BLK = VALUES(BLK),
+    PTS = VALUES(PTS),
+    PTS_RANK = VALUES(PTS_RANK);
+"""
+
+insert_to_player_game_log_table_query = """
+INSERT INTO nba_player_game_log (
+    SEASON_ID, Player_ID, Game_ID, GAME_DATE, MATCHUP, WL,
+    MIN, FGM, FGA, FG_PCT, FG3M, FG3A, FG3_PCT, FTM, FTA,
+    FT_PCT, OREB, DREB, REB, AST, STL, BLK, TOV, PF,
+    PTS, PLUS_MINUS
+) VALUES (
+    %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s,
+    %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s
+) ON DUPLICATE KEY UPDATE
+    GAME_DATE = VALUES(GAME_DATE),
+    MATCHUP = VALUES(MATCHUP),
+    WL = VALUES(WL),
+    MIN = VALUES(MIN),
+    FGM = VALUES(FGM),
+    FGA = VALUES(FGA),
+    FG_PCT = VALUES(FG_PCT),
+    FG3M = VALUES(FG3M),
+    FG3A = VALUES(FG3A),
+    FG3_PCT = VALUES(FG3_PCT),
+    FTM = VALUES(FTM),
+    FTA = VALUES(FTA),
+    FT_PCT = VALUES(FT_PCT),
+    OREB = VALUES(OREB),
+    DREB = VALUES(DREB),
+    REB = VALUES(REB),
+    AST = VALUES(AST),
+    STL = VALUES(STL),
+    BLK = VALUES(BLK),
+    TOV = VALUES(TOV),
+    PF = VALUES(PF),
+    PTS = VALUES(PTS),
+    PLUS_MINUS = VALUES(PLUS_MINUS);
+"""

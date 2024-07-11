@@ -13,7 +13,7 @@ conn, cursor = connect_to_database(environment=ENVIRONMENT)
 g_league_players = playerindex.PlayerIndex(league_id=20).get_data_frames()[0]
 nba_players = playerindex.PlayerIndex().get_data_frames()[0]
 
-for _, row in nba_players.iterrows():
+for _, row in g_league_players.iterrows():
     player_career_stats = playercareerstats.PlayerCareerStats(row['PERSON_ID']).get_data_frames()[0]
     for _, row in player_career_stats.iterrows():
         cursor.execute(insert_to_player_stats_table_query, (
